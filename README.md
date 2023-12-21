@@ -1,52 +1,72 @@
-# dreamerv3-torch
-Pytorch implementation of [Mastering Diverse Domains through World Models](https://arxiv.org/abs/2301.04104v1). DreamerV3 is a scalable algorithm that outperforms previous approaches across various domains with fixed hyperparameters.
+# Installation
+Env:
+1. ubuntu22.04
+2. X86_64
+3. Python3.9
+## Step1: Install OpenGL rendering backands packages 
 
-## Instructions
+MuJoCo/DMC supports three different OpenGL rendering backends: EGL (headless), GLFW (windowed), and OSMesa (headless). For each of them, you need to install some packages:
 
-### Method 1: Manual
+1. GLFW: sudo apt-get install libglfw3 libglew2.2 
+2. EGL: sudo apt-get install libglew2.2 
+3. OSMesa: sudo apt-get install libgl1-mesa-glx libosmesa6
+
+Then, in order to use one of these rendering backends, you need to set the `MUJOCO_GL` environment variable to "glfw", "egl", "osmesa", respectively.
+
+Note:
+
+> The libglew2.2 could have a different name, based on your OS (e.g., libglew2.2 is for Ubuntu 22.04.2 LTS).
+
+For more information: https://github.com/deepmind/dm_control and https://mujoco.readthedocs.io/en/stable/programming/index.html#using-opengl
+
+## Step2: Install Python Dependencies
 
 Get dependencies with python 3.9:
-```
+
+```sh
 pip install -r requirements.txt
 ```
-Run training on DMC Vision:
+
+Check if all dependencies are OK:
+
+```sh
+python test.py
 ```
+
+# Usage
+
+Run training on DMC Vision:
+
+```sh
 python3 dreamer.py --configs dmc_vision --task dmc_walker_walk --logdir ./logdir/dmc_walker_walk
 ```
+
 Monitor results:
-```
+
+```sh
 tensorboard --logdir ./logdir
 ```
-### Method 2: Docker
 
-Please refer to the Dockerfile for the instructions, as they are included within.
+# Benchmarks
 
-## Benchmarks
 So far, the following benchmarks can be used for testing.
-| Environment        | Observation | Action | Budget | Description |
-|-------------------|---|---|---|-----------------------|
-| [DMC Proprio](https://github.com/deepmind/dm_control) | State | Continuous | 500K | DeepMind Control Suite with low-dimensional inputs. |
-| [DMC Vision](https://github.com/deepmind/dm_control) | Image | Continuous |1M| DeepMind Control Suite with high-dimensional images inputs. |
-| [Atari 100k](https://github.com/openai/atari-py) | Image | Discrete |400K| 26 Atari games. |
-| [Crafter](https://github.com/danijar/crafter) | Image | Discrete |1M| Survival environment to evaluates diverse agent abilities.|
-| [Minecraft](https://github.com/minerllabs/minerl) | Image and State |Discrete |100M| Vast 3D open world.|
-| [Memory Maze](https://github.com/jurgisp/memory-maze) | Image |Discrete |100M| 3D mazes to evaluate RL agents' long-term memory.|
 
-## Results
-#### DMC Proprio
-![dmcproprio](https://github.com/NM512/dreamerv3-torch/assets/70328564/0d3f4d44-d487-4097-bed1-3f0573aaf902)
-#### DMC Vision
-![dmcvision](https://github.com/NM512/dreamerv3-torch/assets/70328564/162c24d0-5f06-4ef6-bbc3-202221f6ad11)
-#### Atari 100k
-![atari100k](https://github.com/NM512/dreamerv3-torch/assets/70328564/0da6d899-d91d-44b4-a8c4-d5b37413aa11)
+# Results
 
-#### Crafter
+## DMC Proprio
+
+## DMC Vision
+
+## Atari 100k
+
+
+## Crafter
+
 <img src="https://github.com/NM512/dreamerv3-torch/assets/70328564/a0626038-53f6-4300-a622-7ac257f4c290" width="300" height="150" />
 
-## Acknowledgments
+# Acknowledgments
+
 This code is heavily inspired by the following works:
+
+- NM512's Dreamer-v3 PyTorch implementation: https://github.com/NM512/dreamerv3-torch
 - danijar's Dreamer-v3 jax implementation: https://github.com/danijar/dreamerv3
-- danijar's Dreamer-v2 tensorflow implementation: https://github.com/danijar/dreamerv2
-- jsikyoon's Dreamer-v2 pytorch implementation: https://github.com/jsikyoon/dreamer-torch
-- RajGhugare19's Dreamer-v2 pytorch implementation: https://github.com/RajGhugare19/dreamerv2
-- denisyarats's DrQ-v2 original implementation: https://github.com/facebookresearch/drqv2
