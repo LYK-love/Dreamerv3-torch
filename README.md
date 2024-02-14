@@ -117,6 +117,9 @@ So far, the following benchmarks can be used for testing.
 
 ## Crafter
 
+# Note
+Currently not support `box2d` envs such as `CarRacing`.
+
 # Acknowledgments
 
 This code is heavily inspired by the following works:
