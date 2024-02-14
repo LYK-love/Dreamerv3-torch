@@ -136,3 +136,7 @@ dmypy.json
 
 # VScode
 .vscode/*
+
+# Downloaded files
+Atari-2600-VCS-ROM-Collection.zip
+./ROMS
